@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { componentFactoryName } from '@angular/compiler';
 
 @Component({
@@ -7,5 +7,6 @@ import { componentFactoryName } from '@angular/compiler';
 })
 
 export class CardListComponent {
-
+    @Input() items: any[] = [];
+    @Input() listName: string;
 }

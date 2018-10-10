@@ -11,15 +11,26 @@ import { CardDeck } from '../shared/card.model';
 export class CardDeckPage implements OnInit {
 
     public cardDecks: CardDeck[] = [];
+    private readonly ALLOWED_DECKS = ['classes', 'factions', 'qualities', 'types', 'races'];
     constructor(private cardService: CardService) {}
 
     private getCardDecks() {
         this.cardService.getAllCardDecks().subscribe(
-            (cardDecks) => this.cardDecks = cardDecks.classes
+            (cardDecks: CardDeck[]) => {
+                this.extractAllowedDecks(cardDecks);
+            }
         );
     }
 
     ngOnInit(): void {
         this.getCardDecks();
+    }
+
+    extractAllowedDecks(cardDecks: CardDeck[]) {
+        this.ALLOWED_DECKS.forEach(
+            (deckName: string) => this.cardDecks.push({
+                name: deckName, types: cardDecks[deckName]
+            })
+        );
     }
 }

@@ -1,4 +1,6 @@
-import {Component } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
+import { CardService } from '../shared/card.service';
+import { CardDeck } from '../shared/card.model';
 
 @Component({
     selector: 'app-card-deck',
@@ -6,17 +8,18 @@ import {Component } from '@angular/core';
     styleUrls: [ './card-deck.page.scss' ]
 })
 
-export class CardDeckPage {
+export class CardDeckPage implements OnInit {
 
-    public readonly cardDecks: string[] = [
-        'Druid',
-        'Mage',
-        'Warrior',
-        'Rogue',
-        'Warlock',
-        'Shaman',
-        'Priest',
-        'Hunter',
-        'Paladin'
-    ];
+    public cardDecks: CardDeck[] = [];
+    constructor(private cardService: CardService) {}
+
+    private getCardDecks() {
+        this.cardService.getAllCardDecks().subscribe(
+            (cardDecks) => this.cardDecks = cardDecks.classes
+        );
+    }
+
+    ngOnInit(): void {
+        this.getCardDecks();
+    }
 }

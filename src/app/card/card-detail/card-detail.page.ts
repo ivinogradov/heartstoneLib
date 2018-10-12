@@ -26,4 +26,8 @@ export class CardDetailPage implements OnInit {
     );
   }
 
+  updateImage(event) {
+    this.card.img = './assets/images/DefaultCard.png';
+  }
+
 }

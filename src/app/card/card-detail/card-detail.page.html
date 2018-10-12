@@ -16,7 +16,7 @@
       <ion-card-title>
         {{card?.name}}
       </ion-card-title>
-      <img [src]="card.img">
+      <img [src]="card.img" (error)="updateImage($event)">
     </ion-card-header>
 
     <ion-card-content>

@@ -28,4 +28,8 @@ export class CardService {
   public getCard(cardId: string): Observable<Card[]> {
     return this.http.get<Card[]>(`${this.HS_API_URL}/cards/${cardId}`, { headers: this.headers });
   }
+
+  public replaceCardTextLine(text: string): string {
+    return  text ? text.replace(new RegExp('\\\\n', 'g'), ' ') : ' No Description';
+  }
 }

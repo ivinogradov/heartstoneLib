@@ -20,8 +20,12 @@ export class CardDetailPage implements OnInit {
   ngOnInit() {
     const cardId = this.route.snapshot.paramMap.get('cardId');
     this.cardService.getCard(cardId).subscribe(
-      (card: Card[]) => {
-        this.card = card[0];
+      (cards: Card[]) => {
+        this.card = cards.map((card: Card) => {
+          card.text = this.cardService.replaceCardTextLine(card.text);
+
+          return card;
+        })[0];    // There is only a single card returned
       }
     );
   }

@@ -20,10 +20,10 @@
     </ion-card-header>
 
     <ion-card-content>
-      <p *ngIf="card.text">{{card.text}}</p>
+      <p *ngIf="card.text" [innerHTML]="card.text"></p>
+      <p *ngIf="card.flavor">{{card.flavor}}</p>
       <ion-label> <!-- It'd probssbly be better to `const` this list in the page and iterate through it-->
         <h2 *ngIf="card.attack">Attack: {{card.attack}}</h2>
-        <h2 *ngIf="card.flavor">Flavor: {{card.flavor}}</h2>
         <h2 *ngIf="card.health">Health: {{card.health}}</h2>
         <h2 *ngIf="card.rarity">Rarity: {{card.rarity}}</h2>
         <h2 *ngIf="card.faction">faction: {{card.faction}}</h2>

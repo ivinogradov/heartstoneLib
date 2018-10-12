@@ -19,4 +19,5 @@ export interface Card {
     locale: string;
     playerClass: string;
     text: string;
+    mode: string;
 }

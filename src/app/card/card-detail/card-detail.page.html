@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Card Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngIf="card?.cardId">
+  <ion-card color="accent">
+    <ion-card-header>
+      <ion-card-subtitle>
+        {{card?.type}}
+      </ion-card-subtitle>
+      <ion-card-title>
+        {{card?.name}}
+      </ion-card-title>
+      <img [src]="card.img">
+    </ion-card-header>
+
+    <ion-card-content>
+      <p *ngIf="card.text">{{card.text}}</p>
+      <ion-label> <!-- It'd probssbly be better to `const` this list in the page and iterate through it-->
+        <h2 *ngIf="card.attack">Attack: {{card.attack}}</h2>
+        <h2 *ngIf="card.flavor">Flavor: {{card.flavor}}</h2>
+        <h2 *ngIf="card.health">Health: {{card.health}}</h2>
+        <h2 *ngIf="card.rarity">Rarity: {{card.rarity}}</h2>
+        <h2 *ngIf="card.faction">faction: {{card.faction}}</h2>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

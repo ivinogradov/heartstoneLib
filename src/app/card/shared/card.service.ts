@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of as ObservableOf, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { CardDeck, Card } from './card.model';
@@ -14,8 +14,8 @@ export class CardService {
   private headers: HttpHeaders;
 
   constructor(private http: HttpClient) {
-    this.headers = new HttpHeaders({'X-Mashape-Key' : this.API_KEY});
-   }
+    this.headers = new HttpHeaders({ 'X-Mashape-Key': this.API_KEY });
+  }
 
   public getAllCardDecks(): Observable<CardDeck[]> {
     return this.http.get<CardDeck[]>(`${this.HS_API_URL}/info`, { headers: this.headers });
@@ -23,5 +23,9 @@ export class CardService {
 
   public getCardsByDeck(cardDeckGroup: string, cardDeck: string): Observable<Card[]> {
     return this.http.get<Card[]>(`${this.HS_API_URL}/cards/${cardDeckGroup}/${cardDeck}`, { headers: this.headers });
+  }
+
+  public getCard(cardId: string): Observable<Card[]> {
+    return this.http.get<Card[]>(`${this.HS_API_URL}/cards/${cardId}`, { headers: this.headers });
   }
 }

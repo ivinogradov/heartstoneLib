@@ -8,12 +8,27 @@ import { HttpClientModule } from '@angular/common/http';
 import { CardListComponent  } from './components/card-list.component';
 import { CardListingPage } from './card-listing/card-listing.page';
 import { CardDetailPage } from './card-detail/card-detail.page';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports: [
         IonicModule,
         CommonModule,
-        HttpClientModule
+        HttpClientModule,
+        RouterModule.forChild([
+            {
+                path: '',
+                component: CardDeckPage
+            },
+            {
+                path: ':cardId',
+                component: CardDetailPage,
+            },
+            {
+                path: ':cardDeckGroup/:cardDeck',
+                component: CardListingPage
+            }
+        ])
     ],
     declarations: [
         CardDeckPage,

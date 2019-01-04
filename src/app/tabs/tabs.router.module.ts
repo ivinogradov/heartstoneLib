@@ -2,11 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
-import { AboutPage } from '../about/about.page';
-import { ContactPage } from '../contact/contact.page';
-import { CardDeckPage } from '../card/card-deck/card-deck.page';
-import { CardListingPage } from '../card/card-listing/card-listing.page';
-import { CardDetailPage } from '../card/card-detail/card-detail.page';
 
 const routes: Routes = [
   {
@@ -15,39 +10,59 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/tabs/(home:home)',
+        redirectTo: '/tabs/home',
         pathMatch: 'full',
       },
       {
         path: 'about',
-        outlet: 'about',
-        component: AboutPage
+        children: [
+          {
+            path: '',
+            loadChildren: '../about/about.module#AboutPageModule'
+          }
+        ],
       },
       {
         path: 'contact',
-        outlet: 'contact',
-        component: ContactPage
+        children: [
+          {
+            path: '',
+            loadChildren: '../contact/contact.module#ContactPageModule'
+          }
+        ]
       },
       {
         path: 'card',
-        outlet: 'card',
-        component: CardDeckPage
+        children: [
+          {
+            path: '',
+            loadChildren: '../card/card.module#CardPageModule'
+          }
+        ]
       },
       {
         path: 'card/:cardDeckGroup/:cardDeck',
-        outlet: 'card',
-        component: CardListingPage
+        children: [
+          {
+            path: ':cardDeckGroup/:cardDeck',
+            loadChildren: '../card/card.module#CardPageModule'
+          }
+        ]
       },
       {
         path: 'card/:cardId',
-        outlet: 'card',
-        component: CardDetailPage
+        children: [
+          {
+            path: ':cardId',
+            loadChildren: '../card/card.module#CardPageModule'
+          }
+        ]
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/(card:card)',
+    redirectTo: '/tabs/card',
     pathMatch: 'full'
   }
 ];

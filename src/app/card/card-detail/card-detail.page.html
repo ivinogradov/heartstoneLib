@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
     <ion-title>{{card?.name}}</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/"></ion-back-button> <!-- Incorrect navigation issue: https://github.com/ionic-team/ionic/issues/16928 -->
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

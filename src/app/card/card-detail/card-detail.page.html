@@ -7,8 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding *ngIf="card?.cardId">
-  <ion-card color="accent">
+<ion-content padding>
+  <ion-card color="accent" *ngIf="card?.cardId">
     <ion-card-header>
       <ion-card-subtitle>
         {{card?.type}}

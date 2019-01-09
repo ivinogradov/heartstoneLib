@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
 
 import { CardService } from '../shared/card.service';
 import { Card } from '../shared/card.model';
+import { LoaderService } from '../../shared/services/loader.service';
 
 @Component({
   selector: 'app-card-listing',
@@ -15,7 +15,6 @@ export class CardListingPage implements OnInit {
   private cardDeckGroup: string;
   private cardDeck: string;
   private cards: Card[] = [];
-  private loader: HTMLIonLoadingElement;
 
   // @Input loading: any; // TODO: probably it's better to show loading spinner before navigating, and pass it here for dismissing
   // The other way is to use ionWillAppear launch a spinner there, or ionWillDisappear in the parent page (those are not deprecated)
@@ -23,11 +22,11 @@ export class CardListingPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private cardService: CardService,
-    private loadingCtrl: LoadingController
+    private loader: LoaderService
   ) { }
 
   async ngOnInit() {
-    this.loader = await this.presentLoading();
+    await this.loader.presentLoading();
 
     this.cardDeckGroup = this.route.snapshot.paramMap.get('cardDeckGroup');
     this.cardDeck = this.route.snapshot.paramMap.get('cardDeck');
@@ -38,18 +37,8 @@ export class CardListingPage implements OnInit {
           card.text = this.cardService.replaceCardTextLine(card.text);
           return card;
         });
-        this.loader.dismiss();
+        this.loader.dismissLoading();
       }
     );
   }
-
-  private async presentLoading(): Promise<HTMLIonLoadingElement> {
-    const loader = await this.loadingCtrl.create({
-      message: 'Loading',
-      translucent: true
-    });
-    await loader.present();
-    return loader;
-  }
-
 }

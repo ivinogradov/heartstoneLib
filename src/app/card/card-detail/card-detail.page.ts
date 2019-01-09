@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CardService } from '../shared/card.service';
 import { Card } from '../shared/card.model';
-import { LoadingController } from '@ionic/angular';
+import { LoaderService } from '../../shared/services/loader.service';
 
 @Component({
   selector: 'app-card-detail',
@@ -11,17 +11,15 @@ import { LoadingController } from '@ionic/angular';
 })
 export class CardDetailPage implements OnInit {
   private card: Card;
-  private loader: HTMLIonLoadingElement;
-
 
   constructor(
     private route: ActivatedRoute,
     private cardService: CardService,
-    private loadingCtrl: LoadingController
+    private loader: LoaderService
   ) { }
 
   async ngOnInit() {
-    this.loader = await this.presentLoading();
+    await this.loader.presentLoading();
 
     const cardId = this.route.snapshot.paramMap.get('cardId');
     this.cardService.getCard(cardId).subscribe(
@@ -31,22 +29,13 @@ export class CardDetailPage implements OnInit {
 
           return card;
         })[0];    // There is only a single card returned
-        this.loader.dismiss();
+        this.loader.dismissLoading();
       }
     );
   }
 
   private updateImage(event: any) {
     this.card.img = './assets/images/DefaultCard.png';
-  }
-
-  private async presentLoading(): Promise<HTMLIonLoadingElement> {
-    const loader = await this.loadingCtrl.create({
-      message: 'Loading',
-      translucent: true
-    });
-    await loader.present();
-    return loader;
   }
 
 }

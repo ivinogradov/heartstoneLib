@@ -33,11 +33,11 @@ export class CardListingPage implements OnInit {
 
     this.cardService.getCardsByDeck(this.cardDeckGroup, this.cardDeck).subscribe(
       (cards: Card[]) => {
+        this.loader.dismissLoading();
         this.cards = cards.map((card: Card) => {
           card.text = this.cardService.replaceCardTextLine(card.text);
           return card;
         });
-        this.loader.dismissLoading();
       }
     );
   }

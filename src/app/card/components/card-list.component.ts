@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { componentFactoryName } from '@angular/compiler';
 
 @Component({
     selector: 'app-card-list',
@@ -9,5 +8,4 @@ import { componentFactoryName } from '@angular/compiler';
 export class CardListComponent {
     @Input() items: any[] = [];
     @Input() listName: string;
-    @Input() navigateTo: any;
 }

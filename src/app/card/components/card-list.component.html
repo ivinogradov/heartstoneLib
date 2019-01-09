@@ -3,7 +3,7 @@
         <ion-label>{{listName}}</ion-label>
     </ion-list-header>
 
-    <ion-item button detail *ngFor="let item of items" [href]="navigateTo(listName, item)">
+    <ion-item button detail *ngFor="let item of items" [routerLink]="[ '/tabs/card', listName, item]">
         <ion-avatar slot="start">
             <img [src]="'./assets/images/'+ item + '.png'">
         </ion-avatar>

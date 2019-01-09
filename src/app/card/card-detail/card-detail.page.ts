@@ -24,12 +24,12 @@ export class CardDetailPage implements OnInit {
     const cardId = this.route.snapshot.paramMap.get('cardId');
     this.cardService.getCard(cardId).subscribe(
       (cards: Card[]) => {
+        this.loader.dismissLoading();
         this.card = cards.map((card: Card) => {
           card.text = this.cardService.replaceCardTextLine(card.text);
 
           return card;
         })[0];    // There is only a single card returned
-        this.loader.dismissLoading();
       }
     );
   }

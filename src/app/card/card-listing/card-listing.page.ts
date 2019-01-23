@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CardService } from '../shared/card.service';
 import { Card } from '../shared/card.model';
 import { LoaderService } from '../../shared/services/loader.service';
+import { ToastService } from '../../shared/services/toast.service';
 
 @Component({
   selector: 'app-card-listing',
@@ -22,7 +23,8 @@ export class CardListingPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private cardService: CardService,
-    private loader: LoaderService
+    private loader: LoaderService,
+    private toaster: ToastService
   ) { }
 
   async ngOnInit() {
@@ -38,6 +40,9 @@ export class CardListingPage implements OnInit {
           card.text = this.cardService.replaceCardTextLine(card.text);
           return card;
         });
+      }, (error: Error) => {
+        this.loader.dismissLoading();
+        this.toaster.presentErrorToast('Oops! Cards can\'t be loaded at this time! Try refreshing.');
       }
     );
   }

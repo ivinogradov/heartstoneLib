@@ -27,12 +27,15 @@ export class CardListingPage implements OnInit {
     private toaster: ToastService
   ) { }
 
-  async ngOnInit() {
-    await this.loader.presentLoading();
-
+   ngOnInit() {
     this.cardDeckGroup = this.route.snapshot.paramMap.get('cardDeckGroup');
     this.cardDeck = this.route.snapshot.paramMap.get('cardDeck');
 
+    this.getCards();
+  }
+
+  private async getCards() {
+    await this.loader.presentLoading();
     this.cardService.getCardsByDeck(this.cardDeckGroup, this.cardDeck).subscribe(
       (cards: Card[]) => {
         this.loader.dismissLoading();
@@ -45,5 +48,10 @@ export class CardListingPage implements OnInit {
         this.toaster.presentErrorToast('Oops! Cards can\'t be loaded at this time! Try refreshing.');
       }
     );
+  }
+
+  public async doRefresh(event: any) {
+    await this.getCards();
+    event.target.complete();
   }
 }

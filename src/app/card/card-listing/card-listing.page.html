@@ -9,6 +9,10 @@
 </ion-header>
 
 <ion-content padding>
+  <!-- FIXME: figure out how to set bg color of the refresher when overpulling -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list *ngIf="cards.length > 0">
     <ion-card *ngFor="let card of cards" color="tertiary">
       <ion-card-header>

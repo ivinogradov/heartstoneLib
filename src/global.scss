@@ -11,12 +11,8 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 .toast-error {
-    > div {
-        background-color: #f53d3d !important;
-    }
-    .toast-message {
-        color: white !important;
-    }
+    --background: #f53d3d !important;
+    --color: white !important;
 }
 
 ion-refresher-content {

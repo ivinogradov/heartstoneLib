@@ -1,7 +1,8 @@
 {
   "name": "heartStoneLib",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

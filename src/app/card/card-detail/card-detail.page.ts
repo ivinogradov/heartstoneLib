@@ -10,7 +10,7 @@ import { LoaderService } from '../../shared/services/loader.service';
   styleUrls: ['./card-detail.page.scss'],
 })
 export class CardDetailPage implements OnInit {
-  private card: Card;
+  public card: Card;
 
   constructor(
     private route: ActivatedRoute,

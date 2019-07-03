@@ -13,9 +13,9 @@ import { ToastService } from '../../shared/services/toast.service';
 })
 export class CardListingPage implements OnInit {
 
-  private cardDeckGroup: string;
+  public cardDeckGroup: string;
   private cardDeck: string;
-  private cards: Card[] = [];
+  public cards: Card[] = [];
 
   // @Input loading: any; // TODO: probably it's better to show loading spinner before navigating, and pass it here for dismissing
   // The other way is to use ionWillAppear launch a spinner there, or ionWillDisappear in the parent page (those are not deprecated)

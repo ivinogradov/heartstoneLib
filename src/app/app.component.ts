@@ -17,8 +17,10 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      StatusBar.setStyle({style: StatusBarStyle.Light});
-      SplashScreen.hide();
+      if (this.platform.is('capacitor')) {
+        StatusBar.setStyle({style: StatusBarStyle.Light});
+        SplashScreen.hide();
+      }
     });
   }
 }

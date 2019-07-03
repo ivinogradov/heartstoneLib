@@ -10,6 +10,7 @@ import { CardListingPage } from './card-listing/card-listing.page';
 import { CardDetailPage } from './card-detail/card-detail.page';
 import { RouterModule } from '@angular/router';
 import { ToastService } from '../shared/services/toast.service';
+import { SearchComponent } from '../shared/components/search/search.component';
 
 @NgModule({
     imports: [
@@ -35,7 +36,8 @@ import { ToastService } from '../shared/services/toast.service';
         CardDeckPage,
         CardListComponent,
         CardListingPage,
-        CardDetailPage
+        CardDetailPage,
+        SearchComponent
     ],
     providers: [
         CardService,

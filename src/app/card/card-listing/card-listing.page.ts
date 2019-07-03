@@ -16,6 +16,7 @@ export class CardListingPage implements OnInit {
   public cardDeckGroup: string;
   private cardDeck: string;
   public cards: Card[] = [];
+  public copyOfCards: Card[] = [];
 
   // @Input loading: any; // TODO: probably it's better to show loading spinner before navigating, and pass it here for dismissing
   // The other way is to use ionWillAppear launch a spinner there, or ionWillDisappear in the parent page (those are not deprecated)
@@ -43,6 +44,7 @@ export class CardListingPage implements OnInit {
           card.text = this.cardService.replaceCardTextLine(card.text);
           return card;
         });
+        this.copyOfCards = Array.from(this.cards);
       }, (error: Error) => {
         this.loader.dismissLoading();
         this.toaster.presentErrorToast('Oops! Cards can\'t be loaded at this time! Try refreshing.');
@@ -53,5 +55,9 @@ export class CardListingPage implements OnInit {
   public async doRefresh(event: any) {
     await this.getCards();
     event.target.complete();
+  }
+
+  public hydrateCards(cards: Card[]) {
+    this.cards = cards;
   }
 }

@@ -8,12 +8,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
   <app-search [items]="copyOfCards" 
               [filteredProperty]="'name'"
               (searchCompleted)="hydrateCards($event)"
               (searchStarted)="handleSearch()"></app-search>
-  <ion-spinner text-center *ngIf="isLoading"></ion-spinner>
+  <ion-spinner class="ion-text-center" *ngIf="isLoading"></ion-spinner>
   <!-- FIXME: figure out how to set bg color of the refresher when overpulling -->
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
